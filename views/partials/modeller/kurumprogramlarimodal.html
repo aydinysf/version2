@@ -1,0 +1,78 @@
+{{#each kurumProgramlariListesi}}
+<tr>
+    <th scope="row">
+        <div class="media align-items-center">
+
+            <div class="media-body">
+                <span class="name mb-0 text-sm">{{kurumadi}}</span>
+            </div>
+        </div>
+    </th>
+
+    <th scope="row">
+        <div class="media align-items-center">
+
+            <div class="media-body">
+                <span class="name mb-0 text-sm">{{programadi}}</span>
+            </div>
+        </div>
+    </th>
+
+    <th scope="row">
+        <div class="media align-items-center">
+
+            <div class="media-body">
+                <span class="name mb-0 text-sm">{{programadeti}}</span>
+            </div>
+        </div>
+    </th>
+
+
+    <th scope="row">
+        <div class="media align-items-center">
+
+            <div class="media-body">
+                {{#if ro}}
+                <input type="checkbox" checked disabled>
+                {{else}}
+                <input type="checkbox" disabled>
+                {{/if}}
+            </div>
+        </div>
+    </th>
+
+
+
+
+
+    <td class="text-right">
+        <div class="dropdown">
+            <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+
+                <a class="dropdown-item" onclick="deleteModel('{{kurumprogramlarikod}}','{{kurumkod}}')">Sil</a>
+
+
+            </div>
+        </div>
+    </td>
+
+
+</tr>
+
+{{/each}}
+<script>
+    function deleteModel(a, b) {
+        $.get("/kurumprogramlarisilme/" + a, function (data) {
+
+        });
+
+        $.get("/kurumprogramlari/" + b, function (data) {
+            var tbody = $("#kurumprogramlarilistele");
+            tbody.empty();
+            tbody.append(data);
+        });
+    }
+</script>

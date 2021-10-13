@@ -1,0 +1,129 @@
+
+<div class="app-inner-layout__content">
+    <div class="tab-content">
+        <div class="container-fluid">
+            <div class="tab-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cihaz
+                                        Model Ekleme </h5>
+                                    <button style="margin-left: 1400px;" onclick="location='/cihazlar'"
+                                        class="mb-2 mr-2 btn btn-primary"> Geri Dönün
+                                    </button> <br>
+                                    <h5 style="color: steelblue;"><label id="lbl_cihazmarkasi"></label> Cihazına
+                                        Ait Modeller</h5> <br>
+
+                                    <form class="col-md-10 mx-auto">
+                                        <div class="mb-3">
+                                            <label for="devicename" class="form-label"> Cihaz
+                                                Modeli
+                                            </label>
+                                            
+                                            <input type="hidden" value="{{cihazkod}}" id="hdn_cihazkod" >
+                                            <div>
+                                                <input type="text" class="form-control" placeholder="Cihaz Modeli " id="txt_cihazmodeli" name="txt_cihazmodeli"
+                                                    required>
+                                            </div>
+                                        </div>
+
+                                </div>
+
+
+
+                                <div style="margin-left: 700px;" class="mb-3">
+                                    <button type="button" class="btn btn-primary" id="btn_cihazmodelekle">Ekle
+                                    </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h3 style="text-align: center;">Model Listesi</h3>
+
+            <div class="tab-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <table style="width: 100%;" id="example"
+                                        class="table table-hover table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="sort" data-sort="corporationname">Cihaz Markası
+                                                </th>
+                                                <th scope="col" class="sort" data-sort="corporationname">Cihaz Modeli
+                                                </th>
+                                                <th scope="col"></th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each result}}
+                                            <tr>
+                                                <td>{{cihazmarkasi}}</td>
+                                                <td>{{cihazmodeladi}}</td>
+
+                                                <td class="text-right">
+                                                    <div class="dropdown">
+                                                        <a href="#" role="button" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </a>
+                                                        <div
+                                                            class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+
+
+
+                                                            <a class="dropdown-item"
+                                                                href="cihazmodelsil/{{cihazmodelkod}}">Cihaz
+                                                                Modeli
+                                                                Sil</a>
+
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+            $('#btn_cihazmodelekle').on('click', function () {
+            alert("kayıt başladı");
+            var cihazkod=$("#hdn_cihazkod").text();
+            var cihazmodel=$("#txt_cihazmodeli").val();
+            alert(cihazkod+" -" +cihazmodel);
+            $.post("/cihazamodelkaydet",{modelname:cihazmodel,cihazkod:cihazkod} ,// url
+                function (data, textStatus, jqXHR) {  // success callback
+                    alert("kayıt tamamlandı");
+                }).done(function () {
+                    alert("kayıt tamamlandı");
+                    $.get("/cihazlaraModelYukle/" + code + "/" + text,  // url
+                        function (data, textStatus, jqXHR) {  // success callback
+                            $(".modal-body").empty().append(data);
+                        });
+                })
+                .fail(function () {
+                    alert("error");
+                });
+        });
+</script>

@@ -1,0 +1,19 @@
+{
+  "name": "itage-biyomed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "consolidate": "^0.16.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7"
+  }
+}
