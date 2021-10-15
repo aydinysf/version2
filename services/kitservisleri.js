@@ -38,6 +38,7 @@ exports.kitListele = (req, res, next) => {
 exports.kitEkle =(req,res,next) =>{
     db.con.connect((err)=>{
         const kitkodu = crypto.randomBytes(16).toString("hex")
+      
         var sql="INSERT INTO tblkitler(kitkod,kitmarkasi,kayittarihi) VALUES('"+kitkodu+"','"+req.body.kitmarkasi+"',now())";
         
         var postedFields=[kitkodu,req.body.kitmarkasi];
@@ -93,8 +94,8 @@ exports.kitlereKatalogEkle = (req, res, next) => {
     const kitkatolognumarasi=req.body.kitkatolognumarasi;
     const kitmetodkodu=crypto.randomBytes(16).toString("hex");
     console.log("kitkod:" + kitkodu +"kitkatolognumarasi:" + kitkatolognumarasi);
-    var sql= "INSERT INTO tblkitkataloglari(kitkatalogkod,kitkod,kitkatalognumarasi,kayittarihi)";
-    sql = sql+ "VALUES('"+kitkatologkodu+"','"+kitkodu+"','"+kitkatolognumarasi+"',"+"now())" ;
+    var sql= "INSERT INTO tblkitkataloglari(kitkatalogkod,kitkod,kitkatalognumarasi,kitmetodkod,kayittarihi)";
+    sql = sql+ "VALUES('"+kitkatologkodu+"','"+kitkodu+"','"+kitkatolognumarasi+"','"+kitmetodkodu+"',"+"now())" ;
         
   
         db.con.query(sql, (err, dbrows, fields) => {
@@ -119,10 +120,10 @@ exports.kitlereKatalogEkle = (req, res, next) => {
 
         var idKitKatolog = [];
         db.con.connect((err) => {
-            const kitkod=req.params.kurumprogramkod;
+            const kitkod=req.params.kitkatologkod;
             idKitKatolog.push(String(req.params.kitkatologkod));
             console.log(String(req.params.kitkatologkod));
-            var sql = "Select ktl.kitmarkasi,kkl.kitkatalognumarasi,kkl.kitkod,kkl.kitkatalogkod from tblkitkataloglari kkl left join tblkitler ktl on kkl.kitkod=ktl.kitkod where kkl.kitkod='"+kitkod+"' order by kkl.kayittarihi desc";
+            var sql = "SELECT kt.kitmarkasi,kk.kitkatalogkod,kk.kitkod,kk.kitkatalognumarasi FROM tblkitkataloglari kk left join tblkitler kt  on kk.kitkod=kt.kitkod where kk.kitkod='"+kitkod+"' order by kk.kayittarihi desc";
         
             db.con.query(sql, idKitKatolog, (err, dbrows, fields) => {
                 if (err) {

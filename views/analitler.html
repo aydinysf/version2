@@ -206,11 +206,11 @@
                                                                 <form action="/analitler" method="POST" class="col-md-10 mx-auto"
                                                                    >
                                                                     <div class="mb-3">
-                                                                        <label for="devicename" class="form-label"> Analit Adı 
+                                                                        <label for="analitmarka" class="form-label"> Analit Markasi 
                                                                             </label>
                                                                         <div>
-                                                                            <input type="text" class="form-control" id="analitadi" name="analitadi"
-                                                                            placeholder="Analit Adı">
+                                                                            <input type="text" class="form-control" id="analitmarka" name="analitmarka"
+                                                                            placeholder="Analit Markasi">
                                                                         </div>
                                                                     </div>
 
@@ -269,10 +269,12 @@
                                                                                     <div
                                                                                         class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 
-                                                                                        <a class="dropdown-item" href="/analitlerebirimekleme">Analit Birim 
-                                                                                            Ekle</a>
-                                                                                            <a class="dropdown-item" href="/analitkitekle">Analit Kit 
-                                                                                                Ekle</a>
+                                                                                        <a class="dropdown-item" href="#"
+                                                                                        onclick="analitbirimleri('{{analitkod}}','{{analitmarka}}')">Analit Birim
+                                                                                        Ata</a>
+                                                                                        <a class="dropdown-item" href="#"
+                                                                                        onclick="analitkitleri('{{analitkod}}','{{analitmarka}}')">Analit Kit
+                                                                                        Ata</a>
                                                                                       
                                                                                         <a class="dropdown-item" href="/analitler/{{analitkod}}">Analit
                                                                                             Sil</a>
@@ -963,7 +965,20 @@
 
 
 
+<script>
+   function analitbirimleri(code,text){
+                sessionStorage.setItem("analitkodu",code);
+                sessionStorage.setItem("analitmarka",text);
+                window.location.href="/analitlerebirimekleme";
+            }
 
+
+            function analitkitleri(code,text){
+                sessionStorage.setItem("analitkodu",code);
+                sessionStorage.setItem("analitmarka",text);
+                window.location.href="/analitkitekle";
+            }
+</script>
 
 
 

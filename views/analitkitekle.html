@@ -37,7 +37,7 @@
                     <div class="app-header">
                         <div class="page-title-heading">
                             Analitlere Kit Atama
-                            
+
                         </div>
                         <div class="app-header-right">
                             <div class="search-wrapper">
@@ -124,73 +124,79 @@
                             <div class="app-inner-layout__content">
                                 <div class="tab-content">
                                     <div class="container-fluid">
-                                      
-                                 
+
+
                                         <div class="tab-content">
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="main-card mb-3 card">
                                                             <div class="card-body">
-                                                                <h5 style="margin-left: 633px;" class="card-title">Analitlere Kit Atama </h5>
-                                                                <button style="margin-left: 1400px;" onclick="location='/analitler'" class="mb-2 mr-2 btn btn-primary"> Geri Dönün
+                                                                <h5 style="margin-left: 633px;" class="card-title">
+                                                                    Analitlere Kit Atama </h5>
+                                                                <button style="margin-left: 1400px;"
+                                                                    onclick="location='/analitler'"
+                                                                    class="mb-2 mr-2 btn btn-primary"> Geri Dönün
                                                                 </button> <br>
-                                                                <h5 style="color: steelblue;"><label ></label> Analitine
+                                                                <h5 style="color: steelblue;"><span
+                                                                        id="analitmarka"></span> Analitine
                                                                     Ait Kitler</h5> <br>
+                                                                <input type="hidden" id="hdnanalitkod"
+                                                                    name="hdnanalitkod">
 
-                                                                <form  class="col-md-10 mx-auto"
-                                                                   >
+                                                                <form class="col-md-10 mx-auto">
                                                                     <div class="mb-3">
-                                                                        <label for="devicename" class="form-label"> Kit Markası
-                                                                            </label>
+                                                                        <label for="analitekitMarkasilistele"
+                                                                            class="form-label"> Kit Markası
+                                                                        </label>
                                                                         <div>
-                                                                            <select id="" class="form-control" name=""
-                                                                            maxlength="250">
-                                                                            <option value="True">Kit1</option>
-                                                                            <option value="False">Kit2</option>
-                                                                            <option value="False">Kit3</option>
-                        
-                                                                             </select>
+                                                                            <select id="analitekitMarkasilistele"
+                                                                                class="form-control"
+                                                                                name="analitekitMarkasilistele"
+                                                                                maxlength="250">
+
+
+                                                                            </select>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="mb-3">
-                                                                        <label for="devicename" class="form-label"> Kit Katolog Adı
-                                                                            </label>
+                                                                        <label for="analitekitkatalognumarasilistele"
+                                                                            class="form-label"> Kit Katolog Numarasi
+                                                                        </label>
                                                                         <div>
-                                                                            <select id="" class="form-control" name=""
-                                                                            maxlength="250">
-                                                                            <option value="True">Katolog1</option>
-                                                                            <option value="False">Katolog2</option>
-                                                                            <option value="False">Katolog3</option>
-                        
-                                                                             </select>
+                                                                            <select
+                                                                                id="analitekitkatalognumarasilistele"
+                                                                                class="form-control"
+                                                                                name="analitekitkatalognumarasilistele"
+                                                                                maxlength="250">
+
+                                                                            </select>
                                                                         </div>
                                                                     </div>
 
-                                                                   
 
-                                                               
 
-                                                                   
-                                                                    </div>
 
-                            
 
-                                                                    <div  style="margin-left: 700px;" class="mb-3">
-                                                                        <button  type="submit" class="btn btn-primary"
-                                                                         >Ekle
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
+
                                                             </div>
+
+
+
+                                                            <div style="margin-left: 700px;" class="mb-3">
+                                                                <button type="submit" id="btn_ekle" class="btn btn-primary">Ekle
+                                                                </button>
+                                                            </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                      
-                                       
-                                            <h3 style="text-align: center;">Kitler Listesi</h3>
+                                        </div>
+
+
+                                        <h3 style="text-align: center;">Kitler Listesi</h3>
 
                                         <div class="tab-content">
                                             <div class="container-fluid">
@@ -202,47 +208,24 @@
                                                                     class="table table-hover table-striped table-bordered">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th scope="col" class="sort" data-sort="corporationname">Kit Markası</th>
-                                                                            <th scope="col" class="sort" data-sort="corporationname">Kit Katolog Adı</th>
-                                                                           
+                                                                            <th scope="col" class="sort"
+                                                                            data-sort="corporationname">Analit Markasi
+                                                                        </th>
+                                                                            <th scope="col" class="sort"
+                                                                                data-sort="corporationname">Kit Markası
+                                                                            </th>
+                                                                            <th scope="col" class="sort"
+                                                                                data-sort="corporationname">Kit Katolog
+                                                                                Adı</th>
+
                                                                             <th scope="col"></th>
-                                                                        
+
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                        {{#each result}}
-                                                                        <tr>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                
-                                                                          
-                                                                          
-                                                                         
-                                                                            <td class="text-right">
-                                                                                <div class="dropdown">
-                                                                                    <a href="#" role="button"
-                                                                                        data-toggle="dropdown"
-                                                                                        aria-haspopup="true"
-                                                                                        aria-expanded="false">
-                                                                                        <i
-                                                                                            class="fas fa-ellipsis-v"></i>
-                                                                                    </a>
-                                                                                    <div
-                                                                                        class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-
-
-                                                                                        
-                                                                                        <a class="dropdown-item" >Kit Katolog
-                                                                                            Sil</a>
-                                        
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                        {{/each}}
+                                                                    <tbody class="list" id="analitkitlerilistele">
+                                                              
                                                                     </tbody>
-                                                             
+
                                                                 </table>
                                                             </div>
                                                         </div>
@@ -252,7 +235,6 @@
                                         </div>
 
 
-                                
 
 
 
@@ -261,233 +243,232 @@
 
 
 
-                                    </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
-        <!--THEME OPTIONS START-->
-        <div class="ui-theme-settings">
-            <button type="button" id="TooltipDemo" class="btn-open-options btn btn-outline-2x btn-outline-focus">
-                <i class="fa fa-sync-alt icon-anim-pulse fa-2x"></i>
-            </button>
-            <div class="theme-settings__inner">
-                <div class="scrollbar-container">
-                    <div class="theme-settings__options-wrapper">
-                        <h3 class="themeoptions-heading">Layout Options
-                        </h3>
-                        <div class="p-3">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-3">
-                                                <div class="switch has-switch switch-container-class"
-                                                    data-class="app-sidebar-full">
-                                                    <div class="switch-animate switch-off">
-                                                        <input type="checkbox" data-toggle="toggle"
-                                                            data-onstyle="success">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Full Sidebar
-                                                </div>
-                                                <div class="widget-subheading">Removes sidebar layout spacing.
+    </div>
+    <!--THEME OPTIONS START-->
+    <div class="ui-theme-settings">
+        <button type="button" id="TooltipDemo" class="btn-open-options btn btn-outline-2x btn-outline-focus">
+            <i class="fa fa-sync-alt icon-anim-pulse fa-2x"></i>
+        </button>
+        <div class="theme-settings__inner">
+            <div class="scrollbar-container">
+                <div class="theme-settings__options-wrapper">
+                    <h3 class="themeoptions-heading">Layout Options
+                    </h3>
+                    <div class="p-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="widget-content p-0">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left mr-3">
+                                            <div class="switch has-switch switch-container-class"
+                                                data-class="app-sidebar-full">
+                                                <div class="switch-animate switch-off">
+                                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success">
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="widget-content p-0">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left mr-3">
-                                                <div class="switch has-switch switch-container-class"
-                                                    data-class="body-subnav-pills">
-                                                    <div class="switch-animate switch-off">
-                                                        <input type="checkbox" data-toggle="toggle"
-                                                            data-onstyle="success">
-                                                    </div>
-                                                </div>
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Full Sidebar
                                             </div>
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Pills Page Navigation Style
-                                                </div>
-                                                <div class="widget-subheading">Changes the page sub navigation style to
-                                                    pills!
-                                                </div>
+                                            <div class="widget-subheading">Removes sidebar layout spacing.
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="widget-content p-0">
+                                    <div class="widget-content-wrapper">
+                                        <div class="widget-content-left mr-3">
+                                            <div class="switch has-switch switch-container-class"
+                                                data-class="body-subnav-pills">
+                                                <div class="switch-animate switch-off">
+                                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">Pills Page Navigation Style
+                                            </div>
+                                            <div class="widget-subheading">Changes the page sub navigation style to
+                                                pills!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="themeoptions-heading">
+                        <div>
+                            Sidebar Options
                         </div>
-                        <h3 class="themeoptions-heading">
-                            <div>
-                                Sidebar Options
-                            </div>
-                            <button type="button"
-                                class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-sidebar-cs-class"
-                                data-class="">
-                                Restore Default
-                            </button>
-                        </h3>
-                        <div class="p-3">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <h5 class="pb-2">Choose Color Scheme
-                                    </h5>
-                                    <div class="theme-settings-swatches">
-                                        <div class="swatch-holder bg-primary switch-sidebar-cs-class"
-                                            data-class="bg-primary sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-secondary switch-sidebar-cs-class"
-                                            data-class="bg-secondary sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-success switch-sidebar-cs-class"
-                                            data-class="bg-success sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-info switch-sidebar-cs-class"
-                                            data-class="bg-info sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-warning switch-sidebar-cs-class"
-                                            data-class="bg-warning sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-danger switch-sidebar-cs-class"
-                                            data-class="bg-danger sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-light switch-sidebar-cs-class"
-                                            data-class="bg-light sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-dark switch-sidebar-cs-class"
-                                            data-class="bg-dark sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-focus switch-sidebar-cs-class"
-                                            data-class="bg-focus sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-alternate switch-sidebar-cs-class"
-                                            data-class="bg-alternate sidebar-text-light">
-                                        </div>
-                                        <div class="divider">
-                                        </div>
-                                        <div class="swatch-holder bg-vicious-stance switch-sidebar-cs-class"
-                                            data-class="bg-vicious-stance sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-midnight-bloom switch-sidebar-cs-class"
-                                            data-class="bg-midnight-bloom sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-night-sky switch-sidebar-cs-class"
-                                            data-class="bg-night-sky sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-slick-carbon switch-sidebar-cs-class"
-                                            data-class="bg-slick-carbon sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-asteroid switch-sidebar-cs-class"
-                                            data-class="bg-asteroid sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-royal switch-sidebar-cs-class"
-                                            data-class="bg-royal sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-warm-flame switch-sidebar-cs-class"
-                                            data-class="bg-warm-flame sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-night-fade switch-sidebar-cs-class"
-                                            data-class="bg-night-fade sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-sunny-morning switch-sidebar-cs-class"
-                                            data-class="bg-sunny-morning sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-tempting-azure switch-sidebar-cs-class"
-                                            data-class="bg-tempting-azure sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-amy-crisp switch-sidebar-cs-class"
-                                            data-class="bg-amy-crisp sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-heavy-rain switch-sidebar-cs-class"
-                                            data-class="bg-heavy-rain sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-mean-fruit switch-sidebar-cs-class"
-                                            data-class="bg-mean-fruit sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-malibu-beach switch-sidebar-cs-class"
-                                            data-class="bg-malibu-beach sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-deep-blue switch-sidebar-cs-class"
-                                            data-class="bg-deep-blue sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-ripe-malin switch-sidebar-cs-class"
-                                            data-class="bg-ripe-malin sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-arielle-smile switch-sidebar-cs-class"
-                                            data-class="bg-arielle-smile sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-plum-plate switch-sidebar-cs-class"
-                                            data-class="bg-plum-plate sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-happy-fisher switch-sidebar-cs-class"
-                                            data-class="bg-happy-fisher sidebar-text-dark">
-                                        </div>
-                                        <div class="swatch-holder bg-happy-itmeo switch-sidebar-cs-class"
-                                            data-class="bg-happy-itmeo sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-mixed-hopes switch-sidebar-cs-class"
-                                            data-class="bg-mixed-hopes sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-strong-bliss switch-sidebar-cs-class"
-                                            data-class="bg-strong-bliss sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-grow-early switch-sidebar-cs-class"
-                                            data-class="bg-grow-early sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-love-kiss switch-sidebar-cs-class"
-                                            data-class="bg-love-kiss sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-premium-dark switch-sidebar-cs-class"
-                                            data-class="bg-premium-dark sidebar-text-light">
-                                        </div>
-                                        <div class="swatch-holder bg-happy-green switch-sidebar-cs-class"
-                                            data-class="bg-happy-green sidebar-text-light">
-                                        </div>
+                        <button type="button"
+                            class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-sidebar-cs-class"
+                            data-class="">
+                            Restore Default
+                        </button>
+                    </h3>
+                    <div class="p-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h5 class="pb-2">Choose Color Scheme
+                                </h5>
+                                <div class="theme-settings-swatches">
+                                    <div class="swatch-holder bg-primary switch-sidebar-cs-class"
+                                        data-class="bg-primary sidebar-text-light">
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <h3 class="themeoptions-heading">
-                            <div>Main Content Options</div>
-                        </h3>
-                        <div class="p-3">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <h5 class="pb-2">Color Schemes
-                                    </h5>
-                                    <div class="theme-settings-swatches">
-                                        <div role="group" class="mt-2 btn-group">
-                                            <button type="button"
-                                                class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class"
-                                                data-class="app-theme-white">
-                                                White Theme
-                                            </button>
-                                            <button type="button"
-                                                class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class active"
-                                                data-class="app-theme-gray">
-                                                Gray Theme
-                                            </button>
-                                        </div>
+                                    <div class="swatch-holder bg-secondary switch-sidebar-cs-class"
+                                        data-class="bg-secondary sidebar-text-light">
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
+                                    <div class="swatch-holder bg-success switch-sidebar-cs-class"
+                                        data-class="bg-success sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-info switch-sidebar-cs-class"
+                                        data-class="bg-info sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-warning switch-sidebar-cs-class"
+                                        data-class="bg-warning sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-danger switch-sidebar-cs-class"
+                                        data-class="bg-danger sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-light switch-sidebar-cs-class"
+                                        data-class="bg-light sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-dark switch-sidebar-cs-class"
+                                        data-class="bg-dark sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-focus switch-sidebar-cs-class"
+                                        data-class="bg-focus sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-alternate switch-sidebar-cs-class"
+                                        data-class="bg-alternate sidebar-text-light">
+                                    </div>
+                                    <div class="divider">
+                                    </div>
+                                    <div class="swatch-holder bg-vicious-stance switch-sidebar-cs-class"
+                                        data-class="bg-vicious-stance sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-midnight-bloom switch-sidebar-cs-class"
+                                        data-class="bg-midnight-bloom sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-night-sky switch-sidebar-cs-class"
+                                        data-class="bg-night-sky sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-slick-carbon switch-sidebar-cs-class"
+                                        data-class="bg-slick-carbon sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-asteroid switch-sidebar-cs-class"
+                                        data-class="bg-asteroid sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-royal switch-sidebar-cs-class"
+                                        data-class="bg-royal sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-warm-flame switch-sidebar-cs-class"
+                                        data-class="bg-warm-flame sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-night-fade switch-sidebar-cs-class"
+                                        data-class="bg-night-fade sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-sunny-morning switch-sidebar-cs-class"
+                                        data-class="bg-sunny-morning sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-tempting-azure switch-sidebar-cs-class"
+                                        data-class="bg-tempting-azure sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-amy-crisp switch-sidebar-cs-class"
+                                        data-class="bg-amy-crisp sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-heavy-rain switch-sidebar-cs-class"
+                                        data-class="bg-heavy-rain sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-mean-fruit switch-sidebar-cs-class"
+                                        data-class="bg-mean-fruit sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-malibu-beach switch-sidebar-cs-class"
+                                        data-class="bg-malibu-beach sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-deep-blue switch-sidebar-cs-class"
+                                        data-class="bg-deep-blue sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-ripe-malin switch-sidebar-cs-class"
+                                        data-class="bg-ripe-malin sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-arielle-smile switch-sidebar-cs-class"
+                                        data-class="bg-arielle-smile sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-plum-plate switch-sidebar-cs-class"
+                                        data-class="bg-plum-plate sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-happy-fisher switch-sidebar-cs-class"
+                                        data-class="bg-happy-fisher sidebar-text-dark">
+                                    </div>
+                                    <div class="swatch-holder bg-happy-itmeo switch-sidebar-cs-class"
+                                        data-class="bg-happy-itmeo sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-mixed-hopes switch-sidebar-cs-class"
+                                        data-class="bg-mixed-hopes sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-strong-bliss switch-sidebar-cs-class"
+                                        data-class="bg-strong-bliss sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-grow-early switch-sidebar-cs-class"
+                                        data-class="bg-grow-early sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-love-kiss switch-sidebar-cs-class"
+                                        data-class="bg-love-kiss sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-premium-dark switch-sidebar-cs-class"
+                                        data-class="bg-premium-dark sidebar-text-light">
+                                    </div>
+                                    <div class="swatch-holder bg-happy-green switch-sidebar-cs-class"
+                                        data-class="bg-happy-green sidebar-text-light">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="themeoptions-heading">
+                        <div>Main Content Options</div>
+                    </h3>
+                    <div class="p-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <h5 class="pb-2">Color Schemes
+                                </h5>
+                                <div class="theme-settings-swatches">
+                                    <div role="group" class="mt-2 btn-group">
+                                        <button type="button"
+                                            class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class"
+                                            data-class="app-theme-white">
+                                            White Theme
+                                        </button>
+                                        <button type="button"
+                                            class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class active"
+                                            data-class="app-theme-gray">
+                                            Gray Theme
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!--THEME OPTIONS END-->
+    </div>
+    <!--THEME OPTIONS END-->
     </div>
     <!--DRAWER START-->
     <div class="app-drawer-wrapper">
@@ -921,7 +902,59 @@
 
 
 
+    <script>
 
+        var analitmarka = "";
+        var analitkod = "";
+        $(document).ready(function () {
+            analitmarka = sessionStorage.getItem("analitmarka");
+            analitkod = sessionStorage.getItem("analitkodu");
+            $("#hdnanalitkod").val(analitkod);
+            $("#analitmarka").html(analitmarka);
+
+
+
+       // Listeleme İçin
+       var tbody = $("#analitkitlerilistele");
+            tbody.empty();
+            $.get("/analitkitleri/" + analitkod, function (data) {
+                tbody.append(data);
+            });
+        
+
+
+        });
+
+
+        $("#btn_ekle").on("click", function (event) {
+
+            var kitkodlari = $("#analitekitMarkasilistele").val();
+            var kitkatalogkodlari=$("#analitekitkatalognumarasilistele").val();
+
+            $.post("/analitkitleri", { analitkodu: analitkod, kitkodu: kitkodlari , kitkatalogkodu:kitkatalogkodlari}, function (data) {
+
+
+                $.get("/analitkitleri/" + analitkod, function (data) {
+                    $("#analitkitlerilistele").empty().append(data);
+                });
+                
+
+            });
+        });
+
+
+
+        $.get('/analitekitMarkasiYukle', function (data) {
+            $("#analitekitMarkasilistele").empty().append(data);
+
+        });
+
+
+        $.get('/analitekitkatalognumarasiyukle', function (data) {
+            $("#analitekitkatalognumarasilistele").empty().append(data);
+
+        });
+    </script>
 
 
 

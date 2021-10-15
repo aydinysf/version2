@@ -275,17 +275,15 @@
 
 
 
-                                                                                    <a class="dropdown-item"
-                                                                                        href="/programlaracihazekleme">Program
-                                                                                        Cihazı
-                                                                                        Ata</a>
+                                                                                    <a class="dropdown-item" href="#"
+                                                                                    onclick="programcihazlari('{{programkod}}','{{programadi}}')">Cihaz
+                                                                                    Ata</a>
                                                                                   
                                                                                         <a class="dropdown-item" href="#"
                                                                                         onclick="programanalitleri('{{programkod}}','{{programadi}}')">Analit
                                                                                         Ata</a>
-                                                                                    <a class="dropdown-item"
-                                                                                        href="/programlaratestdonemleriekleme">Program
-                                                                                        Test Dönemlerini
+                                                                                        <a class="dropdown-item" href="#"
+                                                                                        onclick="programtestdonemleri('{{programkod}}','{{programadi}}')">Test Donemi
                                                                                         Ata</a>
                                                                                     <a class="dropdown-item"
                                                                                         href="/programlar/{{programkod}}">Program
@@ -979,6 +977,21 @@
                 sessionStorage.setItem("programadi",text);
                 window.location.href="/programlaraanalitekleme";
             }
+
+
+            function programtestdonemleri(code,text){
+                sessionStorage.setItem("programkodu",code);
+                sessionStorage.setItem("programadi",text);
+                window.location.href="/programlaratestdonemleriekleme";
+            }
+
+
+            function programcihazlari(code,text){
+                sessionStorage.setItem("programkodu",code);
+                sessionStorage.setItem("programadi",text);
+                window.location.href="/programlaracihazekleme";
+            }
+
     </script>
     
 

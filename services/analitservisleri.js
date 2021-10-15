@@ -38,14 +38,14 @@ exports.analitListele = (req, res, next) => {
 exports.analitEkle =(req,res,next) =>{
     db.con.connect((err)=>{
         const analitkod = crypto.randomBytes(16).toString("hex")
-        var sql="INSERT INTO tblanalitler(analitkod,analitmarka,kayittarihi) VALUES('"+analitkod+"','"+req.body.analitadi+",now()')";
+        var sql="INSERT INTO tblanalitler(analitkod,analitmarka,kayittarihi) VALUES('"+analitkod+"','"+req.body.analitmarka+"',now())";
         
-        var postedFields=[analitkod,req.body.analitadi];
+        var postedFields=[analitkod,req.body.analitmarka];
         db.con.query(sql,(err,dbrows,fields)=>{
             if(err){
                 console.log(err.toString());
                 
-                console.log("Analyte Code : "+analitkod+" - Analyte name :"+req.body.analitadi)
+                console.log("Analyte Code : "+analitkod+" - Analyte name :"+req.body.analitmarka)
                 //res.render('./error.html',{result:'',partials:partials});
             }
             else{
@@ -84,45 +84,43 @@ exports.analitSil = (req,res,next)=>{
 
 /////// Analit Birim Ekleme
 
-exports.getAnaliteBirimEkleme = (req, res, next) => {
+exports.birimAdiYukleme = (req, res, next) => {
 
-    var analyteunitscode = String(req.params.codeanalteunits);
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
     db.con.connect((err) => {
-    
-      
-        var sql = "select corp.corporationcode,corp.corporationname,prg.programcode,prg.programname,cprg.corporationprogramscode,case when cprg.ro=1 then 'var' else 'yok' end as ro ,cprg.programcount from tblcorporationprograms cprg " +
-        " left join tblcorporations corp on cprg.corporationcode=corp.corporationcode " +
-        "left join tblprograms prg on prg.programcode=cprg.programcode where cprg.corporationcode='" + corporationcode + "'";
-    
-        db.con.query(sql, idDevice, (err, dbrows, fields) => {
+
+        var sql = "SELECT birimkod,birimadi FROM tblbirimler";
+        db.con.query(sql, (err, dbrows, fields) => {
             if (err) {
-                console.log('Hata:' + err.toString());
-    
-                //res.render('./error.html',{result:'',partials:partials});
+                res.render('./error.html', { result: '', partials: partials });
             }
             else {
-                idDevice = dbrows;
-                console.log(dbrows+" fatih edildi");
-             
-                res.render('./partials/model-modal.html', { deviceModelList: dbrows })
+                res.render('./partials/modeller/analiteBirimAdiYukle.html', { result: dbrows })
             }
+
         });
+        db.con.end;
     });
-    db.con.end;
-    return idDevice;
-    }
-    exports.setDeviceModel = (req, res, next) => {
-    
-    console.log("Kaydet metoduna girdi");
-    const modelcode = crypto.randomBytes(16).toString("hex");
+}
+
+
+
+
+exports.analiteBirimEkleme = (req, res, next) => {
+
+
     db.con.connect((err) => {
-        var sql = "INSERT INTO tbldevicemodels(devicemodelcode,modelname,devicecode) VALUES('" + modelcode + "','" + req.body.modelname + "','" + req.body.devicecode + "')";
-        // var postedFields=[modelcode,req.body.modelname,req.body.devicecode];
-        console.log(req.body);
-        console.log(sql);
-        // db.con.query(sql,postedFields,(err,dbrows,fields)=>{
+    const analitbirimkod = crypto.randomBytes(16).toString("hex");
+    const analitkodu=req.body.analitkodu;
+
+    const birimkod=req.body.birimkod;
+    console.log("analitkodu:" + analitkodu +"birimkod:" + birimkod);
+    var sql= "INSERT INTO tblanalitbirimleri(analitbirimkod,analitkod,birimkod,kayittarihi)";
+    sql = sql+ "VALUES('"+analitbirimkod+"','"+analitkodu+"','"+birimkod+"',"+"now())" ;
+        
+  
         db.con.query(sql, (err, dbrows, fields) => {
-    
+            console.log("programkodu:"+analitkodu);
             if (err) {
                 console.log("Kaydet Servisi Hata :" + err.toString());
     
@@ -137,23 +135,190 @@ exports.getAnaliteBirimEkleme = (req, res, next) => {
     });
     db.con.end;
     }
-    exports.deleteModel = (req, res, next) => {
+
+
+
+    exports.analitBirimleriListele = (req, res, next) => {
+
+        var idAnalitBirimleri = [];
+        db.con.connect((err) => {
+            const analitkod=req.params.analitbirimkod;
+            idAnalitBirimleri.push(String(req.params.analitbirimkod));
+            console.log(String(req.params.analitbirimkod));
+            var sql = "Select tab.analitbirimkod,ta.analitmarka,tab.analitkod,tb.birimadi,tb.birimkod,ta.analitkod from tblanalitbirimleri tab left join tblanalitler ta on tab.analitkod = ta.analitkod left join tblbirimler tb on tab.birimkod=tb.birimkod where tab.analitkod='"+analitkod+"' order by tab.kayittarihi desc";
+        
+            db.con.query(sql, idAnalitBirimleri, (err, dbrows, fields) => {
+                if (err) {
+                    console.log('Hata:' + err.toString());
+        
+                    //res.render('./error.html',{result:'',partials:partials});
+                }
+                else {
+                    idAnalitBirimleri = dbrows;
+                    console.log(dbrows+" fatih edildi");
+                 
+                    res.render('./partials/modeller/analitbirimlerimodal.html', { analitBirimleriListesi: dbrows })
+                }
+            });
+        });
+        db.con.end;
+        return idAnalitBirimleri;
+        }
+
+
+
+        exports.analitBirimSilme = (req, res, next) => {
+            db.con.connect((err) => {
+            
+                var idAnalitBirimleri = [];
+                idAnalitBirimleri.push(String(req.params.analitbirimleriid));
+                var sql = "Delete from tblanalitbirimleri where analitbirimkod=?";
+            
+                db.con.query(sql, idAnalitBirimleri, (err, dbrows, fields) => {
+                    if (err) {
+                        console.log('Hata:' + err.toString());
+            
+                        //res.render('./error.html',{result:'',partials:partials});
+                    }
+                    else {
+                        //res.render('./devices.html', { result: dbrows, partials: partials })
+                    }
+                });
+            });
+            db.con.end;
+            }
+            
+
+     ////////////////////// ANalite KİT ekleme
+     
+     
+
+     
+exports.analiteKitMarkasiEkle = (req, res, next) => {
+
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
     db.con.connect((err) => {
+
+        var sql = "SELECT kitkod,kitmarkasi FROM tblkitler";
+        db.con.query(sql, (err, dbrows, fields) => {
+            if (err) {
+                res.render('./error.html', { result: '', partials: getPartials()  });
+            }
+            else {
+                res.render('./partials/modeller/analiteKitMarkasıYukle.html', { result: dbrows })
+            }
+
+        });
+        db.con.end;
+    });
+}
+
+
+
+
+
+exports.analiteKitKataloguEkle = (req, res, next) => {
+
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
+    db.con.connect((err) => {
+
+        var sql = "SELECT kitkatalogkod,kitkatalognumarasi FROM tblkitkataloglari";
+        db.con.query(sql, (err, dbrows, fields) => {
+            if (err) {
+                res.render('./error.html', { result: '', partials: getPartials()  });
+   
+            }
+            else {
+                res.render('./partials/modeller/analitlereKitKatologEkle.html', { result: dbrows })
+               
+            }
+
+        });
+        db.con.end;
+    });
+}
+
+
+
+
+exports.analiteKitEkleme =(req,res,next) =>{
+    db.con.connect((err)=>{
+
+        const analitkitkod = crypto.randomBytes(16).toString("hex");
+        const analitkodu=req.body.analitkodu;
+        const kitkodu =req.body.kitkodu;
+        const kitkatalogkodu=req.body.kitkatalogkodu;
+         
+        console.log("analitkodu : "+analitkodu+" kitkodu : "+ kitkodu+ "kitkatalogkodu: " + kitkatalogkodu);
+        var sql="INSERT INTO tblanalitkitleri (analitkitkod, analitkod, kitkod, kitkatalogkod,kayittarihi)";
+        sql=sql+" VALUES('"+analitkitkod+"','"+analitkodu+"','"+kitkodu+"', '"+kitkatalogkodu+"',"+"now())";
+        
+        
+        db.con.query(sql,(err,dbrows,fields)=>{
+            if(err){
+                console.log(err.toString());
+                
+                //console.log("Corporation Code : "+kurumkod+" - corporation name :"+req.body.kurumadi+" - corporation address :"+req.body.kurumsevkadresi+" - corporation invoiceaddress :"+req.body.kurumsevkadresi+" - corporation isactive :"+req.body.isactive)
+                //res.render('./error.html',{result:'',partials:partials});
+            }
+            else{
+                //res.render('./kurumlar.html', { result: dbrows, partials: partials })
+                console.log("Kit  eklendi");
+            }
+        });
+    });
+    db.con.end;
+}
+
+
+
+
+exports.analitKitleriListele = (req, res, next) => {
+
+    var idAnalitKitleri = [];
+    db.con.connect((err) => {
+        const analitkod=req.params.analitkitlerikod;
+        idAnalitKitleri.push(String(req.params.analitkitlerikod));
+        console.log(String(req.params.analitkitlerikod));
+        var sql = "Select tak.analitkitkod,ta.analitmarka,tak.analitkod,tk.kitmarkasi,tk.kitkod,tkk.kitkatalognumarasi,tkk.kitkatalogkod from tblanalitkitleri tak left join tblanalitler ta on tak.analitkod = ta.analitkod  left join tblkitler tk on tak.kitkod=tk.kitkod left join tblkitkataloglari tkk on tak.kitkatalogkod=tkk.kitkatalogkod where tak.analitkod='"+analitkod+"' order by tak.kayittarihi desc";
     
-        var idDevice = [];
-        idDevice.push(String(req.params.modelid));
-        var sql = "Delete from tbldevicemodels where devicemodelcode=?";
-    
-        db.con.query(sql, idDevice, (err, dbrows, fields) => {
+        db.con.query(sql, idAnalitKitleri, (err, dbrows, fields) => {
             if (err) {
                 console.log('Hata:' + err.toString());
     
                 //res.render('./error.html',{result:'',partials:partials});
             }
             else {
-                //res.render('./devices.html', { result: dbrows, partials: partials })
+                idAnalitKitleri = dbrows;
+                console.log(dbrows+" fatih edildi");
+                
+                res.render('./partials/modeller/analitkitlerimodal.html', { analitkitlerilistesi: dbrows })
             }
         });
     });
     db.con.end;
+    return idAnalitKitleri;
     }
+
+
+    
+    exports.analitKitSilme = (req, res, next) => {
+        db.con.connect((err) => {
+        
+            var idAnalitKitleri = [];
+            idAnalitKitleri.push(String(req.params.analitkitkodid));
+            var sql = "Delete from tblanalitkitleri where analitkitkod=?";
+        
+            db.con.query(sql, idAnalitKitleri, (err, dbrows, fields) => {
+                if (err) {
+                    console.log('Hata:' + err.toString());
+        
+                    //res.render('./error.html',{result:'',partials:partials});
+                }
+                else {
+                    //res.render('./devices.html', { result: dbrows, partials: partials })
+                }
+            });
+        });
+        db.con.end;
+        }

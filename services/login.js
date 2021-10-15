@@ -25,7 +25,7 @@ exports.login = (req, res, next) => {
                 else{
                     res.send("0");
                 }
-                
+
             }
 
         });

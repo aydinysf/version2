@@ -39,7 +39,7 @@ exports.kurumlariListele = (req, res, next) => {
 exports.kurumEkle =(req,res,next) =>{
     db.con.connect((err)=>{
         const kurumkod = crypto.randomBytes(16).toString("hex")
-        var sql="INSERT INTO tblkurumlar(kurumkod,kurumadi,kurumadresi, kurumsevkadresi, kurumaktiflik) VALUES('"+kurumkod+"','"+req.body.kurumadi+"','"+req.body.kurumadresi+"','"+req.body.kurumsevkadresi+"','"+req.body.kurumaktiflik+"')";
+        var sql="INSERT INTO tblkurumlar(kurumkod,kurumadi,kurumadresi, kurumsevkadresi, kurumaktiflik,kurumkayittarihi) VALUES('"+kurumkod+"','"+req.body.kurumadi+"','"+req.body.kurumadresi+"','"+req.body.kurumsevkadresi+"','"+req.body.kurumaktiflik+"',now())";
         
         var postedFields=[kurumkod,req.body.kurumadi,req.body.kurumadresi,req.body.kurumsevkadresi,req.body.isactive];
         db.con.query(sql,(err,dbrows,fields)=>{
@@ -332,7 +332,7 @@ exports.kurumaCihazMarkasiYukle = (req, res, next) => {
         var sql = "SELECT cihazkod,cihazmarkasi FROM tblcihazlar";
         db.con.query(sql, (err, dbrows, fields) => {
             if (err) {
-                res.render('./error.html', { result: '', partials: partials });
+                res.render('./error.html', { result: '', partials: getPartials()  });
             }
             else {
                 res.render('./partials/modeller/kurumlaraCihazMarkasiYukleme.html', { result: dbrows })
@@ -355,17 +355,19 @@ exports.kurumaCihazModeliYukle = (req, res, next) => {
         var sql = "SELECT cihazmodelkod,cihazmodeladi FROM tblcihazmodelleri";
         db.con.query(sql, (err, dbrows, fields) => {
             if (err) {
-                res.render('./error.html', { result: '', partials: partials });
+                res.render('./error.html', { result: '', partials: getPartials()  });
+                console.log("Hata Nedir");
             }
             else {
                 res.render('./partials/modeller/kurumlaraCihazModeliYukleme.html', { result: dbrows })
+                console.log("Hata Nedir");
             }
 
         });
         db.con.end;
     });
 }
-
+/// Çalışan Select Sorgusu Select  chz.cihazmarkasi,chz.cihazkod,chm.cihazmodeladi,chm.cihazkod,chm.cihazmodelkod from tblcihazmodelleri chm left join tblcihazlar chz on chm.cihazkod = chz.cihazkod   where chm.cihazkod=chz.cihazkod
 
 
 

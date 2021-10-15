@@ -303,7 +303,13 @@
                                                                         <td>{{kurumadi}}</td>
                                                                         <td>{{kurumadresi}}</td>
                                                                         <td>{{kurumsevkadresi}}</td>
-                                                                        <td>{{kurumaktiflik}}</td>
+                                                                        <td>
+                                                                            {{#if kurumaktiflik}}
+                                                                            <input type="checkbox" checked disabled>
+                                                                            {{else}}
+                                                                            <input type="checkbox" disabled>
+                                                                            {{/if}}
+                                                                        </td>
                                                                       
                                                                         <td class="text-right">
                                                                             <div class="dropdown">

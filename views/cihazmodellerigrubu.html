@@ -206,10 +206,10 @@
                                                                 <form action="/cihazmodellerigrubu" method="POST"
                                                                  >
                                                                     <div class="mb-3">
-                                                                        <label for="cihazmodeliyukle" class="form-label"> Cihaz Markası
+                                                                        <label for="cihazgrubunaCihazMarkasiListele" class="form-label"> Cihaz Markası
                                                                             </label>
                                                                         <div>
-                                                                            <select class="form-control" id="cihazmodeliyukle" name="devicemodelbrand" required>
+                                                                            <select class="form-control" id="cihazgrubunaCihazMarkasiListele" name="devicemodelbrand" required>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -991,14 +991,15 @@
 
 
 <script>
-$.get("/cihazModelYukle", function (data) {
-               
-               var tbody = $("#cihazmodeliyukle");
-               console.log(tbody);
-               tbody.empty();
-               tbody.append(data);
-       
-           });
+  $.get('/CihazModeligrubunacihazmodeliYukle', function (data) {
+            $("#cihazgrubunacihazmodeligetir").empty().append(data);
+
+        });
+
+        $.get('/cihazgrubunaCihazMarkasiYukle', function (data) {
+            $("#cihazgrubunaCihazMarkasiListele").empty().append(data);
+
+        });
 </script>
 
     

@@ -35,7 +35,7 @@ exports.birimListeleme = (req, res, next) => {
 exports.birimKaydetme =(req,res,next) =>{
     db.con.connect((err)=>{
         const birimkod = crypto.randomBytes(16).toString("hex")
-        var sql="INSERT INTO tblbirimler(birimkod,birimadi,birimkatsayi,birimsembol) VALUES('"+birimkod+"','"+req.body.unitname+"','"+req.body.unitcoefficient+"','"+req.body.unitsymbol+"')";
+        var sql="INSERT INTO tblbirimler(birimkod,birimadi,birimkatsayi,birimsembol,kayittarihi) VALUES('"+birimkod+"','"+req.body.unitname+"','"+req.body.unitcoefficient+"','"+req.body.unitsymbol+"',now())";
         
         var postedFields=[birimkod,req.body.unitname,req.body.unitcoefficient,req.body.unitsymbol];
         db.con.query(sql,(err,dbrows,fields)=>{

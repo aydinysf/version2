@@ -33,7 +33,7 @@ exports.kitMetodListele = (req, res, next) => {
 exports.kitMetodKaydet =(req,res,next) =>{
     db.con.connect((err)=>{
         const kitmetodkod = crypto.randomBytes(16).toString("hex")
-        var sql="INSERT INTO tblkitmetod(kitmetodkod,kitmetodadi) VALUES('"+kitmetodkod+"','"+req.body.kitmetodadi+"')";
+        var sql="INSERT INTO tblkitmetod(kitmetodkod,kitmetodadi,kayittarihi) VALUES('"+kitmetodkod+"','"+req.body.kitmetodadi+"',now())";
         
         var postedFields=[kitmetodkod,req.body.kitmetodadi];
         db.con.query(sql,(err,dbrows,fields)=>{

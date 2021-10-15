@@ -8,6 +8,10 @@ const path = require('path');
 const app = express();
 
 
+
+
+
+const loginservisler = require("./services/login");
 const cihazservisleri = require("./services/cihazservisleri");
 const cihazmodellerigrubuservisleri = require("./services/cihazmodellerigrubuservisleri");
 const cihazmodelleriservisleri = require("./services/cihazmodelleriservisleri");
@@ -20,7 +24,6 @@ const kullaniciTipleriservisleri = require("./services/kullanicitipleriservisler
 const numunelerservisleri = require("./services/numunelerservisleri");
 const birimtanimlamaservices = require("./services/birimtanimlamservices");
 const kitmetodlariservisleri = require("./services/kitmetodservisleri");
-const loginservisler = require("./services/login");
 app.engine('html', engines.handlebars);
 
 app.set('views', './views');
@@ -49,6 +52,7 @@ app.post('/login', (req, res,next) => {
   loginservisler.login(req, res, next);
 });
 
+
 app.get('/kurumlar/:kodkurum', (req, res, next) => {
   kurumservisleri.kurumlariSil(req, res, next);
   kurumservisleri.kurumlariListele(req, res, next);
@@ -75,8 +79,8 @@ app.post('/kurumprogramlari', (req, res, next) => {
   kurumservisleri.kurumProgramiListele(req, res, next);
 });
 
-app.get('/kurumprogramlarisilme/:kurumprogramlariid', (req, res, next) => {
-  kurumservisleri.kurumProgramıSilme(req, res, next);
+app.get('/kurumprogramlarisilme/:kurumprogramlariid',(req,res,next)=>{
+  kurumservisleri.kurumProgramıSilme(req,res,next);
   kurumservisleri.kurumProgramiListele(req, res, next);
 });
 
@@ -98,8 +102,8 @@ app.post('/kurumkullanicilari', (req, res, next) => {
   kurumservisleri.kurumaKisiEkle(req, res, next);
   kurumservisleri.kurumKisileriListele(req, res, next);
 });
-app.get('/kurumkullanicilarisilme/:kurumkullanicilariid', (req, res, next) => {
-  kurumservisleri.kurumKisileriSilme(req, res, next);
+app.get('/kurumkullanicilarisilme/:kurumkullanicilariid',(req,res,next)=>{
+  kurumservisleri.kurumKisileriSilme(req,res,next);
   kurumservisleri.kurumKisileriListele(req, res, next);
 });
 
@@ -124,7 +128,7 @@ app.get('/cihazModeliYukleme', (req, res, next) => {
 app.post('/kurumcihazlari', (req, res, next) => {
   kurumservisleri.kurumaCihazEkle(req, res, next);
   kurumservisleri.kurumCihazlariListele(req, res, next);
-
+ 
 });
 
 
@@ -132,8 +136,8 @@ app.get('/kurumcihazlari/:kurumcihazlarikod', (req, res, next) => {
   kurumservisleri.kurumCihazlariListele(req, res, next);
 });
 
-app.get('/kurumcihazlarisilme/:kurumcihazlariid', (req, res, next) => {
-  kurumservisleri.kurumCihazlariSilme(req, res, next);
+app.get('/kurumcihazlarisilme/:kurumcihazlariid',(req,res,next)=>{
+  kurumservisleri.kurumCihazlariSilme(req,res,next);
   kurumservisleri.kurumCihazlariListele(req, res, next);
 });
 
@@ -166,8 +170,8 @@ app.post('/cihazmodel', (req, res, next) => {
   cihazservisleri.cihazaModelListele(req, res, next);
 });
 
-app.get('/cihazmodelsilme/:cihazmodelid', (req, res, next) => {
-  cihazservisleri.ModelSilme(req, res, next);
+app.get('/cihazmodelsilme/:cihazmodelid',(req,res,next)=>{
+  cihazservisleri.ModelSilme(req,res,next);
   cihazservisleri.cihazaModelListele(req, res, next);
 });
 
@@ -192,6 +196,14 @@ app.post('/cihazmodellerigrubu', (req, res, next) => {
   cihazmodellerigrubuservisleri.cihazmodelleriGrubuListele(req, res, next);
 });
 
+
+app.get('/CihazModeligrubunacihazmodeliYukle', (req, res, next) => {
+  cihazmodellerigrubuservisleri.CihazModeligrubunacihazmodeliYukle(req, res, next);
+});
+
+app.get('/cihazgrubunaCihazMarkasiYukle', (req, res, next) => {
+  cihazmodellerigrubuservisleri.cihazgrubunaCihazMarkasiYukle(req, res, next);
+});
 
 
 
@@ -224,10 +236,13 @@ app.get('/kitkatologlari/:kitkatologkod', (req, res, next) => {
 });
 
 
-app.get('/kitkatologlarisilme/:kitkatologid', (req, res, next) => {
-  kitservisleri.KitKatologSilme(req, res, next);
+app.get('/kitkatologlarisilme/:kitkatologid',(req,res,next)=>{
+  kitservisleri.KitKatologSilme(req,res,next);
   kitservisleri.kitKatologlariListele(req, res, next);
 });
+
+
+
 
 
 // Programlar
@@ -262,9 +277,58 @@ app.get('/programanalitleri/:programanalitkod', (req, res, next) => {
   programservisleri.programAnalitleriListele(req, res, next);
 });
 
-app.get('/programanalitlerisilme/:programanalitleriid', (req, res, next) => {
-  programservisleri.programAnalitiSilme(req, res, next);
+app.get('/programanalitlerisilme/:programanalitleriid',(req,res,next)=>{
+  programservisleri.programAnalitiSilme(req,res,next);
   programservisleri.programAnalitleriListele(req, res, next);
+});
+
+
+/// Program Test Donemi Ekleme
+
+app.get('/numuneMarkasiYukle', (req, res, next) => {
+  programservisleri.numuneMarkasiYukle(req, res, next);
+
+});
+
+app.post('/programtestdonemleri', (req, res, next) => {
+  programservisleri.programaTestDonemiEkleme(req, res, next);
+  programservisleri.programTestDonemiListele(req, res, next);
+});
+
+app.get('/programtestdonemleri/:programtestdonemikod', (req, res, next) => {
+  programservisleri.programTestDonemiListele(req, res, next);
+});
+
+app.get('/programtestdonemlerisilme/:programtestdonemleriid',(req,res,next)=>{
+  programservisleri.programTestDonemiSilme(req,res,next);
+  programservisleri.programTestDonemiListele(req, res, next);
+});
+
+
+// Program Cihazlari
+
+
+app.get('/programlaraCihazMarkasiYukleme', (req, res, next) => {
+  programservisleri.programaCihazMarkasiYukle(req, res, next);
+});
+
+app.get('/programlaraCihazModeliYukleme', (req, res, next) => {
+  programservisleri.programaCihazModeliYukle(req, res, next);
+});
+
+app.post('/programcihazlari', (req, res, next) => {
+  programservisleri.programaCihazEkleme(req, res, next);
+  programservisleri.programCihazlariListele(req, res, next);
+});
+
+
+app.get('/programcihazlari/:programcihazlarikod', (req, res, next) => {
+  programservisleri.programCihazlariListele(req, res, next);
+});
+
+app.get('/programcihazlarisilme/:programcihazlariid',(req,res,next)=>{
+  programservisleri.programCihaziSilme(req,res,next);
+  programservisleri.programCihazlariListele(req, res, next);
 });
 
 
@@ -283,6 +347,59 @@ app.post('/analitler', (req, res, next) => {
 });
 
 
+/// Analite Birim EKLEME
+
+app.get('/analiteBirimAdiYukle', (req, res, next) => {
+  analitservisleri.birimAdiYukleme(req, res, next);
+
+});
+
+
+app.post('/analitbirimleri', (req, res, next) => {
+  analitservisleri.analiteBirimEkleme(req, res, next);
+  analitservisleri.analitBirimleriListele(req, res, next);
+});
+app.get('/analitbirimleri/:analitbirimkod', (req, res, next) => {
+  analitservisleri.analitBirimleriListele(req, res, next);
+});
+
+
+app.get('/analitbirimlerisilme/:analitbirimleriid',(req,res,next)=>{
+  analitservisleri.analitBirimSilme(req,res,next);
+  analitservisleri.analitBirimleriListele(req, res, next);
+});
+
+
+// Analite Kit Atama
+
+app.get('/analitekitMarkasiYukle', (req, res, next) => {
+  analitservisleri.analiteKitMarkasiEkle(req, res, next);
+
+});
+
+app.get('/analitekitkatalognumarasiyukle', (req, res, next) => {
+  analitservisleri.analiteKitKataloguEkle(req, res, next);
+
+});
+
+
+app.post('/analitkitleri', (req, res, next) => {
+  analitservisleri.analiteKitEkleme(req, res, next);
+  analitservisleri.analitKitleriListele(req, res, next);
+});
+
+app.get('/analitkitleri/:analitkitlerikod', (req, res, next) => {
+  analitservisleri.analitKitleriListele(req, res, next);
+});
+
+
+app.get('/analitkitlerisilme/:analitkitkodid',(req,res,next)=>{
+  analitservisleri.analitKitSilme(req,res,next);
+  analitservisleri.analitKitleriListele(req, res, next);
+});
+
+
+/// Kullanıcılar
 app.get('/kullanicilar/:kodkullanici', (req, res, next) => {
   kullaniciservisleri.kullaniciSil(req, res, next);
   kullaniciservisleri.kullanicilariListele(req, res, next);
@@ -376,6 +493,19 @@ app.get('/', (req, res) => {
   res.render('loginpage', { partials: getPartials() });
 });
 
+app.get('/cikisyap', (req, res) => {
+  //res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
+  //res.render('mainpage', null);
+  res.render('loginpage', { partials: getPartials() });
+});
+
+/* Daha Sonra Lazım Olabilir
+app.get('/login', (req, res) => {
+  //res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
+  //res.render('mainpage', null);
+  res.render('loginpage', { partials: getPartials() });
+});
+*/
 
 app.get('/yonetim-paneli', (req, res) => {
   //res.set('Cache-Control', 'public, max-age=300, s-maxage=600');

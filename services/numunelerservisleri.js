@@ -34,7 +34,7 @@ exports.numuneListele = (req, res, next) => {
 exports.numuneEkleme =(req,res,next) =>{
     db.con.connect((err)=>{
         const numunekod = crypto.randomBytes(16).toString("hex")
-        var sql="INSERT INTO tblnumuneler(numunekod,numunead,numunealias,numuneadeti) VALUES('"+numunekod+"','"+req.body.numunemarka+"','"+req.body.numunekod+"','"+req.body.numuneadeti+"')";
+        var sql="INSERT INTO tblnumuneler(numunekod,numunead,numunealias,numuneadeti,kayittarihi) VALUES('"+numunekod+"','"+req.body.numunemarka+"','"+req.body.numunekod+"','"+req.body.numuneadeti+"',now())";
         
         var postedFields=[numunekod,req.body.numunemarka,req.body.numunekod,req.body.numuneadeti];
         db.con.query(sql,(err,dbrows,fields)=>{

@@ -93,8 +93,8 @@ exports.cihazaModelEkle = (req, res, next) => {
 
     const modeladi=req.body.modeladi;
     console.log("cihazkod:" + cihazkodu +"modeladi:" + modeladi);
-    var sql= "INSERT INTO tblcihazmodelleri(cihazmodelkod,cihazkod,cihazmodeladi)";
-    sql = sql+ "VALUES('"+modelkod+"','"+cihazkodu+"','"+modeladi+"')" ;
+    var sql= "INSERT INTO tblcihazmodelleri(cihazmodelkod,cihazkod,cihazmodeladi,kayittarihi)";
+    sql = sql+ "VALUES('"+modelkod+"','"+cihazkodu+"','"+modeladi+"',now())" ;
         
   
         db.con.query(sql, (err, dbrows, fields) => {
@@ -166,4 +166,3 @@ exports.cihazaModelEkle = (req, res, next) => {
             db.con.end;
             }
             
-

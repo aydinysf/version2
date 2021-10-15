@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="app-container app-theme-white body-tabs-shadow">
+<div class="app-container app-theme-white body-tabs-shadow">
         <div class="app-container">
             <div class="h-100 bg-plum-plate bg-animation">
                 <div class="d-flex h-100 justify-content-center align-items-center">
@@ -28,22 +28,23 @@
                                         <div class="form-row">
                                             <div class="col-md-12">
                                                 <div class="position-relative form-group"><input name="email" id="email"
-                                                        placeholder="Email Adresi..." type="email" class="form-control">
-                                                </div>
+                                                    placeholder="Email Adresi..." type="email" class="form-control">
+                                            </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="position-relative form-group"><input name="password"
-                                                        id="password" placeholder="Parola..." type="password"
-                                                        class="form-control"></div>
-                                            </div>   <div class="col-md-12">
-                                                <div class="position-relative form-group" id="warning"></div>
-                                            </div>
+                                                    id="password" placeholder="Parola..." type="password"
+                                                    class="form-control"></div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="position-relative form-group" id="warning"></div>
+                                            </div>
+                                        </div>                           
                                     </form>
                                 </div>
                                 <div class="modal-footer clearfix">
                                     <div class="float-left"><a href="javascript:void(0);" class="btn-lg btn btn-link"
-                                            id="btnlogin">Parolamı unuttum</a></div>
+                                        id="btnlogin">Parolamı unuttum</a></div>
                                     <div class="float-right">
                                         <input type="button" class="btn btn-primary btn-lg" onclick="test('sdsd')"
                                             value="Yönetim Paneline Giriş" id="btnlogin">
@@ -56,44 +57,43 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
 
-    {{>foot}}
-    <script>
-        function test(data) {
-            var email = $("#email").val();
-            var pass = $("#password").val();
-            $.post("/login", { user: email, password: pass },// url
-                function (data, textStatus, jqXHR) {  // success callback
-                    if (data == "1") {
+{{>foot}}
+
+<script>
+    function test(data) {
+        var email = $("#email").val();
+        var pass = $("#password").val();
+        $.post("/login", { user: email, password: pass },// url
+            function (data, textStatus, jqXHR) {  // success callback
+                if (data == "1") {
+                    window.location.href = "/yonetim-paneli";
+                    // location.href = "/mainpage";
+                }
+            }).done(function () {
+                    if(data==1){
                         window.location.href = "/yonetim-paneli";
-                        // location.href = "/mainpage";
+
                     }
-                    else {
-                        alert(data);
+                    else{
+                        $("#warning").empty().append("Paralo veya Kullanıcı Adı Yanlış");
                     }
-                }).done(function () {
-                        if(data==1){
-                            window.location.href = "/yonetim-paneli";
-                  
-                        }
-                        else{
-                            $("#warning").empty().append("Paralo veya Kullanıcı Adı Yanlış");
-                        }
 
-                })
-                .fail(function () {
-                    $("#warning").empty().append("Beklenmedik Bir Hata İle Karşılaşıldı");
-                });
-        }
-        $("#btnlogin").click(function () {
+            })
+            .fail(function () {
+                $("#warning").empty().append("Beklenmedik Bir Hata İle Karşılaşıldı");
+            });
+    }
+    $("#btnlogin").click(function () {
 
-        });
+    });
 
 
 
 
-    </script>
+</script>
+
+
 </body>
-
 </html>

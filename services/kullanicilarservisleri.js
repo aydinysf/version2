@@ -40,7 +40,7 @@ exports.kullanicilariListele = (req, res, next) => {
 exports.kullaniciEkle =(req,res,next) =>{
     db.con.connect((err)=>{
         const kullanicikod = crypto.randomBytes(16).toString("hex")
-        var sql="INSERT INTO tblkullanicilar(kullanicikod,kullaniciadi,parola,kullanicitipi,aktiflik) VALUES('"+kullanicikod+"','"+req.body.kullanicimail+"','"+req.body.kullanicipassword+"','"+req.body.kullanicitipi+"','"+req.body.aktiflik+"')";
+        var sql="INSERT INTO tblkullanicilar(kullanicikod,kullaniciadi,parola,kullanicitipi,aktiflik,kayittarihi) VALUES('"+kullanicikod+"','"+req.body.kullanicimail+"','"+req.body.kullanicipassword+"','"+req.body.kullanicitipi+"','"+req.body.aktiflik+"',now())";
         
         var postedFields=[kullanicikod,req.body.kullanicimail,req.body.kullanicipassword,req.body.kullanicitipi,req.body.aktiflik];
         db.con.query(sql,(err,dbrows,fields)=>{
